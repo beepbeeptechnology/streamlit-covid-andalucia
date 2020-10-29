@@ -79,7 +79,7 @@ andalucia_chart = alt.Chart(andalucia).mark_bar().encode(
     tooltip=[alt.Tooltip('Territorio:O', title='Territorio'),
              alt.Tooltip('fecha:T', title='Fecha', format='%a %d %b %Y'),
              alt.Tooltip('Valor:Q', format='.0f', title=metric_selected)]
-).properties(width=chart_width, height=chart_height)
+)#.properties(width=chart_width, height=chart_height)
 
 # Andalucia page content
 st.markdown(f"## Andalucía: {metric_selected}")
@@ -117,7 +117,7 @@ single_provincia_chart = alt.Chart(single_provincia).mark_bar().encode(
     tooltip=[alt.Tooltip('Territorio:O', title='Provincia'),
              alt.Tooltip('fecha:T', title='Fecha', format='%a %d %b %Y'),
              alt.Tooltip('Valor:Q', format='.0f', title=metric_selected)]
-).properties(width=chart_width, height=chart_height, title=provincia_selected)
+).properties(width=chart_width, height=chart_height, title=provincia_selected).configure_title(fontSize=24)
 
 st.write(single_provincia_chart)
 

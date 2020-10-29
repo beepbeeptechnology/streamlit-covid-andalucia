@@ -4,6 +4,7 @@ import pandas as pd
 import altair as alt
 
 
+# cached data import function
 @st.cache
 def get_data(url: str):
     source_data = pd.read_csv(url)
@@ -12,6 +13,7 @@ def get_data(url: str):
     return data_dict
 
 
+# page header
 st.title('Covid-19: Andalucía')
 st.sidebar.title('Opciones')
 
@@ -61,11 +63,10 @@ metric_selected = st.sidebar.selectbox('Medida', metrics, index=1, key='metric_s
 clean_dataframe_date = clean_dataframe[(clean_dataframe['fecha'] >= datetime_from)]
 clean_dataframe_out = clean_dataframe_date[clean_dataframe_date['Medida'] == metric_selected]
 
-#st.write(clean_dataframe_out)
+# header: latest data
 st.markdown(f"`Última fecha de datos: {max_date.date()}`")
 
 # Andalucia
-st.markdown(f"## Andalucía: {metric_selected}")
 andalucia = clean_dataframe_out[clean_dataframe_out['Territorio'] == 'Andalucía']
 
 # Andalucia chart
@@ -80,12 +81,12 @@ andalucia_chart = alt.Chart(andalucia).mark_bar().encode(
              alt.Tooltip('Valor:Q', format='.0f', title=metric_selected)]
 ).properties(width=chart_width, height=chart_height)
 
+# Andalucia page content
+st.markdown(f"## Andalucía: {metric_selected}")
 st.write(andalucia_chart)
 
-# Provincias
-st.markdown(f"## Provincias: {metric_selected}")
+# Provincias data
 provincias = clean_dataframe_out[clean_dataframe_out['Territorio'] != 'Andalucía']
-# st.write(provincias)
 
 # Provincias chart
 trellis_chart_width = 300
@@ -101,8 +102,6 @@ provincias_chart = alt.Chart(provincias).mark_bar().encode(
 ).properties(
     width=trellis_chart_width, height=trellis_chart_height
 )
-
-st.write(provincias_chart)
 
 # Single province
 st.markdown(f"## Provincia Unica: {metric_selected}")
@@ -121,6 +120,12 @@ single_provincia_chart = alt.Chart(single_provincia).mark_bar().encode(
 ).properties(width=chart_width, height=chart_height, title=provincia_selected)
 
 st.write(single_provincia_chart)
+
+# Page content: Multiple Provinces
+st.markdown(f"## Provincias: {metric_selected}")
+st.write(provincias_chart)
+
+
 
 # Page footer
 st.markdown("> #### Fuente de Datos: [Junta de Andalucía: Consejería de Salud y Familias](https://www.juntadeandalucia.es/institutodeestadisticaycartografia/badea/operaciones/consulta/anual/39409?CodOper=b3_2314&codConsulta=39409) \n ##### Desarrollado por: [beepbeep.technology](https://beepbeep.technology)")

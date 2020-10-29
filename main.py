@@ -64,7 +64,7 @@ clean_dataframe_date = clean_dataframe[(clean_dataframe['fecha'] >= datetime_fro
 clean_dataframe_out = clean_dataframe_date[clean_dataframe_date['Medida'] == metric_selected]
 
 # header: latest data
-st.markdown(f"`Última fecha de datos: \n{max_date.date()}`")
+st.markdown(f"Última fecha de datos: \n`{max_date.date()}`")
 
 # Andalucia
 andalucia = clean_dataframe_out[clean_dataframe_out['Territorio'] == 'Andalucía']

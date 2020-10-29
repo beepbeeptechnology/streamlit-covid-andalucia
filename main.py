@@ -128,9 +128,8 @@ st.write(provincias_chart)
 
 
 # Page footer
-st.markdown("> #### Fuente de Datos: [Junta de Andalucía: Consejería de Salud y Familias](https://www.juntadeandalucia.es/institutodeestadisticaycartografia/badea/operaciones/consulta/anual/39409?CodOper=b3_2314&codConsulta=39409) \n ##### Desarrollado por: [beepbeep.technology](https://beepbeep.technology)")
-
-
+st.markdown("> #### Fuente de Datos: [Junta de Andalucía: Consejería de Salud y Familias](https://www.juntadeandalucia.es/institutodeestadisticaycartografia/badea/operaciones/consulta/anual/39409?CodOper=b3_2314&codConsulta=39409)")
+st.markdown("> [![View Source on GitHub](https://assets.website-files.com/5eb1d49f3ed8c28a5a54769f/5eb7085ea11928da1d01a2d7_Github%20Icon.svg)](https://github.com/beepbeeptechnology/streamlit-covid-andalucia) View Source on GitHub ([beepbeep.technology](https://beepbeep.technology))")
 
 
 

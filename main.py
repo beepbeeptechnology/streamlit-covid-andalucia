@@ -64,7 +64,7 @@ clean_dataframe_date = clean_dataframe[(clean_dataframe['fecha'] >= datetime_fro
 clean_dataframe_out = clean_dataframe_date[clean_dataframe_date['Medida'] == metric_selected]
 
 # header: latest data
-st.markdown(f"`Última fecha de datos: {max_date.date()}`")
+st.markdown(f"`Última fecha de datos: \n{max_date.date()}`")
 
 # Andalucia
 andalucia = clean_dataframe_out[clean_dataframe_out['Territorio'] == 'Andalucía']
@@ -79,7 +79,7 @@ andalucia_chart = alt.Chart(andalucia).mark_bar().encode(
     tooltip=[alt.Tooltip('Territorio:O', title='Territorio'),
              alt.Tooltip('fecha:T', title='Fecha', format='%a %d %b %Y'),
              alt.Tooltip('Valor:Q', format='.0f', title=metric_selected)]
-)#.properties(width=chart_width, height=chart_height)
+).properties(width=chart_width, height=chart_height)
 
 # Andalucia page content
 st.markdown(f"## Andalucía: {metric_selected}")

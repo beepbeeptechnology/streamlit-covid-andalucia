@@ -49,7 +49,7 @@ clean_dataframe = clean_dataframe.drop(['Fecha diagnóstico'], axis=1)
 # set min/max dates for sidebar selector
 min_date = clean_dataframe['fecha'].min()
 max_date = clean_dataframe['fecha'].max()
-intial_date_from = datetime(2020, 8, 1, 0, 0, 0, 0)
+intial_date_from = datetime(2020, 9, 1, 0, 0, 0, 0)
 date_from = st.sidebar.date_input('Fecha desde', value=intial_date_from, min_value=min_date, max_value=max_date, key='date_from')
 
 time_from = datetime.min.time()

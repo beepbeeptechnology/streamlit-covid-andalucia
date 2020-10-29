@@ -70,7 +70,7 @@ st.markdown(f"Última fecha de datos: \n`{max_date.date()}`")
 andalucia = clean_dataframe_out[clean_dataframe_out['Territorio'] == 'Andalucía']
 
 # Andalucia chart
-chart_width = 700
+chart_width = 680
 chart_height = 400
 
 andalucia_chart = alt.Chart(andalucia).mark_bar().encode(

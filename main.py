@@ -17,7 +17,7 @@ def get_data(url, today_date):
 # add header with last data refresh time
 today_date = datetime.now()
 today_date_hour_rounded = today_date.replace(second=0, microsecond=0, minute=0)
-st.markdown(f"`Datos actualizados: {today_date_hour_rounded}`")
+st.markdown(f"`Datos actualizados: {today_date_hour_rounded} UTC`")
 
 # page header
 st.title('Covid-19: Andalucía')

@@ -7,10 +7,6 @@ import requests
 
 today_date = datetime.now()
 
-s = requests.get(url).content
-df = pd.read_csv(io.StringIO(s.decode('utf-8')))
-
-
 # cached data import function
 @st.cache
 def get_data(url, today_date):

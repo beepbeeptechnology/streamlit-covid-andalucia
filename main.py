@@ -3,12 +3,12 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 
+today_date = datetime.now()
 
 # cached data import function
 @st.cache
-def get_data(url: str):
+def get_data(url, today_date):
     source_data = pd.read_csv(url)
-    today_date = datetime.now()
     data_dict = {"data_date": today_date, "data": source_data}
     return data_dict
 

@@ -5,17 +5,19 @@ import altair as alt
 import io
 import requests
 
-today_date = date.today()
 
 # cached data import function
 @st.cache
 def get_data(url, today_date):
     source = requests.get(url, verify=False).content
-    #source_data = pd.read_csv(url)
     source_data = pd.read_csv(io.StringIO(source.decode('utf-8')))
     data_dict = {"data_date": today_date, "data": source_data}
     return data_dict
 
+# add header with last data refresh time
+today_date = datetime.now()
+today_date_hour_rounded = today_date.replace(second=0, microsecond=0, minute=0)
+st.markdown(f"`Datos actualizados: {today_date_hour_rounded}`")
 
 # page header
 st.title('Covid-19: Andalucía')
@@ -24,7 +26,7 @@ device_type = st.radio('Dispositivo', ['Mobile', 'Desktop'], index=0)
 
 # get data from url
 source_csv_url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/badea/stpivot/stpivot/Print?cube=387d5cdb-7026-4f4b-beb2-fb7e511cc485&type=3&foto=si&ejecutaDesde=&codConsulta=39409&consTipoVisua=JP"
-source_data = get_data(source_csv_url, today_date)
+source_data = get_data(source_csv_url, today_date_hour_rounded)
 source_csv_data = source_data['data']
 today_date = source_data['data_date']
 
@@ -37,7 +39,6 @@ if device_type == 'Desktop':
     trellis_chart_columns = 2
     title_font_size = 20
     intial_date_from = today_date - timedelta(days=90)
-    #intial_date_from = datetime(2020, 8, 1, 0, 0, 0, 0)
 
 else:
     chart_width = 320
@@ -89,7 +90,7 @@ clean_dataframe_date = clean_dataframe[(clean_dataframe['fecha'] >= datetime_fro
 clean_dataframe_out = clean_dataframe_date[clean_dataframe_date['Medida'] == metric_selected]
 
 # header: latest data
-st.markdown(f"Última fecha de datos: \n`{max_date.date()}`")
+st.markdown(f"`Última fecha de datos: {max_date.date()}`")
 
 # Andalucia
 andalucia = clean_dataframe_out[clean_dataframe_out['Territorio'] == 'Andalucía']

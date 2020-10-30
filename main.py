@@ -5,7 +5,7 @@ import altair as alt
 import io
 import requests
 
-today_date = datetime.now()
+today_date = date.today()
 
 # cached data import function
 @st.cache

@@ -10,7 +10,7 @@ today_date = datetime.now()
 # cached data import function
 @st.cache
 def get_data(url, today_date):
-    source = requests.get(url).content
+    source = requests.get(url, verify=False).content
     #source_data = pd.read_csv(url)
     source_data = pd.read_csv(io.StringIO(source.decode('utf-8')))
     data_dict = {"data_date": today_date, "data": source_data}

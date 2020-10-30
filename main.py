@@ -2,14 +2,21 @@ from datetime import datetime, date, timedelta
 import streamlit as st
 import pandas as pd
 import altair as alt
+import io
+import requests
 
 today_date = datetime.now()
+
+s = requests.get(url).content
+df = pd.read_csv(io.StringIO(s.decode('utf-8')))
 
 
 # cached data import function
 @st.cache
 def get_data(url, today_date):
-    source_data = pd.read_csv(url)
+    source = requests.get(url).content
+    #source_data = pd.read_csv(url)
+    source_data = pd.read_csv(io.StringIO(source.decode('utf-8')))
     data_dict = {"data_date": today_date, "data": source_data}
     return data_dict
 

@@ -5,6 +5,7 @@ import altair as alt
 
 today_date = datetime.now()
 
+
 # cached data import function
 @st.cache
 def get_data(url, today_date):

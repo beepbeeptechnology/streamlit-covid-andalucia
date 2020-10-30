@@ -5,7 +5,7 @@ import altair as alt
 
 
 # cached data import function
-#@st.cache
+@st.cache
 def get_data(url: str):
     source_data = pd.read_csv(url)
     today_date = datetime.now()
@@ -16,7 +16,7 @@ def get_data(url: str):
 # page header
 st.title('Covid-19: Andalucía')
 st.sidebar.title('Options')
-device_type = st.radio('Device Type', ['Mobile', 'Desktop'], index=0)
+device_type = st.radio('Dispositivo', ['Mobile', 'Desktop'], index=0)
 
 # get data from url
 source_csv_url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/badea/stpivot/stpivot/Print?cube=387d5cdb-7026-4f4b-beb2-fb7e511cc485&type=3&foto=si&ejecutaDesde=&codConsulta=39409&consTipoVisua=JP"
@@ -36,9 +36,9 @@ if device_type == 'Desktop':
     #intial_date_from = datetime(2020, 8, 1, 0, 0, 0, 0)
 
 else:
-    chart_width = 350
+    chart_width = 320
     chart_height = 250
-    trellis_chart_width = 300
+    trellis_chart_width = 280
     trellis_chart_height = 200
     trellis_chart_columns = 1
     title_font_size = 20

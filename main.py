@@ -123,24 +123,27 @@ provincias_chart = alt.Chart(provincias).mark_bar().encode(
     width=trellis_chart_width, height=trellis_chart_height
 )
 
-# Single province
-st.markdown(f"## Provincia Unica: {metric_selected}")
+# only show single province if on desktop
+if device_type == 'Desktop':
+    # Single province
+    st.markdown(f"## Provincia Unica: {metric_selected}")
 
-provincia_list = provincias['Territorio'].unique()
-provincia_selected = st.selectbox('Seleccione una provincia', options=provincia_list, index=3)
-single_provincia = provincias[provincias['Territorio'] == provincia_selected]
+    provincia_list = provincias['Territorio'].unique()
+    provincia_selected = st.selectbox('Seleccione una provincia', options=provincia_list, index=3)
+    single_provincia = provincias[provincias['Territorio'] == provincia_selected]
 
-#Single province chart
-single_provincia_chart = alt.Chart(single_provincia).mark_bar().encode(
-    x=alt.X('fecha:T', title='Fecha'),
-    y=alt.Y('Valor:Q', title=metric_selected),
-    tooltip=[alt.Tooltip('Territorio:O', title='Provincia'),
-             alt.Tooltip('fecha:T', title='Fecha', format='%a %d %b %Y'),
-             alt.Tooltip('Valor:Q', format='.0f', title=metric_selected)]
-).properties(width=chart_width, height=chart_height, title=provincia_selected
-).configure_title(fontSize=title_font_size)
 
-st.write(single_provincia_chart)
+    #Single province chart
+    single_provincia_chart = alt.Chart(single_provincia).mark_bar().encode(
+        x=alt.X('fecha:T', title='Fecha'),
+        y=alt.Y('Valor:Q', title=metric_selected),
+        tooltip=[alt.Tooltip('Territorio:O', title='Provincia'),
+                 alt.Tooltip('fecha:T', title='Fecha', format='%a %d %b %Y'),
+                 alt.Tooltip('Valor:Q', format='.0f', title=metric_selected)]
+    ).properties(width=chart_width, height=chart_height, title=provincia_selected
+    ).configure_title(fontSize=title_font_size)
+
+    st.write(single_provincia_chart)
 
 # Page content: Multiple Provinces
 st.markdown(f"## Provincias: {metric_selected}")

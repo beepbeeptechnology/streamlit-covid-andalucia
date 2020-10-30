@@ -21,7 +21,7 @@ device_type = st.radio('Dispositivo', ['Mobile', 'Desktop'], index=0)
 
 # get data from url
 source_csv_url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/badea/stpivot/stpivot/Print?cube=387d5cdb-7026-4f4b-beb2-fb7e511cc485&type=3&foto=si&ejecutaDesde=&codConsulta=39409&consTipoVisua=JP"
-source_data = get_data(source_csv_url)
+source_data = get_data(source_csv_url, today_date)
 source_csv_data = source_data['data']
 today_date = source_data['data_date']
 

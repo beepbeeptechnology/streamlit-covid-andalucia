@@ -39,9 +39,9 @@ if device_type == 'Desktop':
     intial_date_from = today_date - timedelta(days=90)
 
 else:
-    chart_width = 200
+    chart_width = 300
     chart_height = 250
-    trellis_chart_width = 200
+    trellis_chart_width = 300
     trellis_chart_height = 200
     trellis_chart_columns = 1
     title_font_size = 20

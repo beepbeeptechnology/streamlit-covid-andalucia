@@ -41,7 +41,7 @@ if device_type == 'Desktop':
 else:
     chart_width = 310
     chart_height = 250
-    trellis_chart_width = 270
+    trellis_chart_width = 260
     trellis_chart_height = 200
     trellis_chart_columns = 1
     title_font_size = 20

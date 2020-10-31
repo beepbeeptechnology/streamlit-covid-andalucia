@@ -17,11 +17,9 @@ def get_data(url, today_date):
 # add header with last data refresh time
 today_date = datetime.now()
 today_date_hour_rounded = today_date.replace(second=0, microsecond=0, minute=0)
-st.markdown(f"`Datos actualizados: {today_date_hour_rounded} UTC`")
 
 # page header
 st.title('Covid-19: Andalucía')
-st.sidebar.title('Options')
 device_type = st.radio('Dispositivo', ['Mobile', 'Desktop'], index=0)
 
 # get data from url
@@ -41,9 +39,9 @@ if device_type == 'Desktop':
     intial_date_from = today_date - timedelta(days=90)
 
 else:
-    chart_width = 320
+    chart_width = 200
     chart_height = 250
-    trellis_chart_width = 280
+    trellis_chart_width = 200
     trellis_chart_height = 200
     trellis_chart_columns = 1
     title_font_size = 20
@@ -76,21 +74,22 @@ clean_dataframe = clean_dataframe.drop(['Fecha diagnóstico'], axis=1)
 # set min/max dates for sidebar selector
 min_date = clean_dataframe['fecha'].min()
 max_date = clean_dataframe['fecha'].max()
-date_from = st.sidebar.date_input('Fecha desde', value=intial_date_from, min_value=min_date, max_value=max_date, key='date_from')
+date_from = st.date_input('Fecha desde', value=intial_date_from, min_value=min_date, max_value=max_date, key='date_from')
 
 time_from = datetime.min.time()
 datetime_from = datetime.combine(date_from, time_from)
 
 # get metrics for sidebar selector
 metrics = list(clean_dataframe['Medida'].unique())
-metric_selected = st.sidebar.selectbox('Medida', metrics, index=1, key='metric_selected')
+metric_selected = st.selectbox('Medida', metrics, index=1, key='metric_selected')
+
+# header: latest data
+st.markdown(f"`Última fecha de datos: {max_date.date()}`")
 
 # filter for date and metric selected
 clean_dataframe_date = clean_dataframe[(clean_dataframe['fecha'] >= datetime_from)]
 clean_dataframe_out = clean_dataframe_date[clean_dataframe_date['Medida'] == metric_selected]
 
-# header: latest data
-st.markdown(f"`Última fecha de datos: {max_date.date()}`")
 
 # Andalucia
 andalucia = clean_dataframe_out[clean_dataframe_out['Territorio'] == 'Andalucía']
@@ -152,6 +151,8 @@ st.write(provincias_chart)
 
 
 # Page footer
+st.markdown(f"`Datos actualizados:  {today_date_hour_rounded} UTC`")
+
 st.markdown("> #### Fuente de Datos: [Junta de Andalucía: Consejería de Salud y Familias](https://www.juntadeandalucia.es/institutodeestadisticaycartografia/badea/operaciones/consulta/anual/39409?CodOper=b3_2314&codConsulta=39409)")
 st.markdown("> [![View Source on GitHub](https://assets.website-files.com/5eb1d49f3ed8c28a5a54769f/5eb7085ea11928da1d01a2d7_Github%20Icon.svg)](https://github.com/beepbeeptechnology/streamlit-covid-andalucia) View Source on GitHub ([beepbeep.technology](https://beepbeep.technology))")
 

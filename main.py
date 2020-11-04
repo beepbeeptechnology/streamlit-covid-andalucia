@@ -111,7 +111,7 @@ st.write(andalucia_chart)
 provincias = clean_dataframe_out[clean_dataframe_out['Territorio'] != 'Andalucía']
 
 # Provincias chart
-facet_spacing = {"row": 50, "column": 0}
+facet_spacing = {"row": 50, "column": 20}
 
 provincias_chart = alt.Chart(provincias).mark_bar().encode(
     x=alt.X('fecha:T', title='Fecha'),

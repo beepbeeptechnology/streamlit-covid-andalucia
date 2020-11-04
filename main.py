@@ -111,13 +111,15 @@ st.write(andalucia_chart)
 provincias = clean_dataframe_out[clean_dataframe_out['Territorio'] != 'Andalucía']
 
 # Provincias chart
+facet_spacing = {"row": 50, "column": 0}
+
 provincias_chart = alt.Chart(provincias).mark_bar().encode(
     x=alt.X('fecha:T', title='Fecha'),
     y=alt.Y('Valor:Q', title=metric_selected),
     tooltip=[alt.Tooltip('Territorio:O', title='Provincia'),
              alt.Tooltip('fecha:T', title='Fecha', format='%a %d %b %Y'),
              alt.Tooltip('Valor:Q', format='.0f', title=metric_selected)],
-    facet=alt.Facet('Territorio:O', columns=trellis_chart_columns, title=None, header=alt.Header(labelFontSize=20))
+    facet=alt.Facet('Territorio:O', columns=trellis_chart_columns, title=None, header=alt.Header(labelFontSize=20), spacing=facet_spacing)
 ).properties(
     width=trellis_chart_width, height=trellis_chart_height
 )
